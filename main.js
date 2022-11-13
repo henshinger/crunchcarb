@@ -46,6 +46,15 @@ document.addEventListener('alpine:init', () => {
                 this.tweet_link_visible = false;
             }
 
+        },
+        copy_output() {
+            var input = document.createElement('textarea');
+            input.innerHTML = this.output_text;
+            document.body.appendChild(input);
+            input.select();
+            var result = document.execCommand('copy');
+            document.body.removeChild(input);
+            return result;
         }
     })
     Alpine.data('text_input', () => ({

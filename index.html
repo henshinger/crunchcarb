@@ -17,17 +17,28 @@
 	<body>
 		<nav class="navbar is-white topNav">
 			<div class="container">
-				<a class="navbar-item" href="../">
-					<img src="css/logo.png">
-				</a>
 				<div class="navbar-brand">
-
-					<div class="navbar-burger burger" data-target="topNav">
-						<span></span>
-						<span></span>
-						<span></span>
-					</div>
-				</div>
+                    <a class="navbar-item" href="/">
+                        <img src="css/logo.png" alt="" width="112">
+                    </a>
+                </div>
+				<div class="navbar-start"></div>
+				<div class="navbar-center">
+                    <div class="navbar-item is-search">
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input is-rounded" type="text" placeholder="Search...">
+                            <span class="icon is-small is-left">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </span>
+                            <span class="icon is-small is-close is-right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x no-click"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
 				<!-- <div id="topNav" class="navbar-menu">
 
 					<div class="navbar-start">
@@ -40,48 +51,17 @@
 						<a class="navbar-item" href="tabs.html">Tabs</a>
 					</div> -->
 					<div class="navbar-end">
-						<div class="navbar-item">
-							<div class="field is-grouped">
-								<p class="control">
-									<a class="button is-small">
-										<span class="icon">
-											<i class="fa fa-user-plus"></i>
-										</span>
-										<span>
-											Register
-										</span>
-									</a>
-								</p>
-								<p class="control">
-									<a class="button is-small is-info is-outlined">
-										<span class="icon">
-											<i class="fa fa-user"></i>
-										</span>
-										<span>Login</span>
-									</a>
-								</p>
+						<div class="navbar-start">
+							<div class="navbar-item">
+								<a href="#" class="button is-success">
+									<span class="icon is-small">
+										<i class="fas fa-pen"></i>
+									</span>
+									<span>Write</span>
+								</a>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
-		<nav class="navbar is-white">
-			<div class="container">
-				<div class="navbar-menu">
-					<div class="navbar-start">
-						<!-- <a class="navbar-item is-active" href="#">Popular</a>
-						<a class="navbar-item" href="#">Recent</a>
-						<a class="navbar-item" href="#">Rising</a> -->
 
-					</div>
-					<div class="navbar-end">
-						<div class="navbar-item">
-							<input class="input" type="search" placeholder="Search forum...">
-						</div>
-						<div class="buttons">
-							<button class="button is-primary"> + New </button>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -90,7 +70,7 @@
 			<div class="columns">
 				<div class="column is-4">
 					<!-- <a class="button is-primary is-block is-alt is-large" href="#">New Post</a> -->
-					<div class="tabs is-boxed">
+					<div class="tabs tab-feed-container is-toggle is-fullwidth ">
 						<ul>
 						  <li :class="$store.text.is_news_feed_visible ? 'is-active' : ''" @click="$store.text.is_news_feed_visible = true"><a>News</a></li>
 						  <li :class="$store.text.is_news_feed_visible ? '' : 'is-active'" @click="$store.text.is_news_feed_visible = false"><a>Policy</a></li>
@@ -148,14 +128,14 @@
 								<div class="control" :class="{'is-loading': $store.text.is_loading}">
 									<textarea id="input-text" class="textarea" placeholder="" rows="15" x-model="$store.text.input_text"></textarea>
 								</div>
-								<div class="columns">
+								<div class="columns" style="margin: 1rem 0;">
 									<div class="column">
 										<button class="button is-success" @click="$store.text.summarize()">Summarize</button>
 									</div>
 									<div class="column">
 										<div class="dropdown is-up" :class="{ 'is-active': rephrase_open }" >
 											<div class="dropdown-trigger">
-											  <button class="button is-info" aria-haspopup="true" aria-controls="dropdown-menu" x-bind="rephrase_dropdown">
+											  <button class="button is-success" aria-haspopup="true" aria-controls="dropdown-menu" x-bind="rephrase_dropdown">
 												<span>Rephrase</span>
 												<span class="icon is-small">
 												  <i class="fas fa-angle-up" aria-hidden="true"></i>
@@ -174,7 +154,7 @@
 									<div class="column">
 										<div class="dropdown is-up" :class="{ 'is-active': create_open }" >
 											<div class="dropdown-trigger">
-											  <button class="button is-info" aria-haspopup="true" aria-controls="dropdown-menu" x-bind="create_dropdown">
+											  <button class="button is-success" aria-haspopup="true" aria-controls="dropdown-menu" x-bind="create_dropdown">
 												<span>Create</span>
 												<span class="icon is-small">
 												  <i class="fas fa-angle-up" aria-hidden="true"></i>
@@ -196,11 +176,12 @@
 								<div class="control" :class="{'is-loading': $store.text.is_loading}">
 									<textarea id="output-text" class="textarea" placeholder="" rows="15" x-model="$store.text.output_text"></textarea>
 								</div>
-								<div class="columns">
+								<div class="columns" style="margin: 1rem 0;">
 									<div class="column">
 										<div class="buttons is-right">
-											<a class="button is-info" :href="$store.text.tweet_link" :class="$store.text.tweet_link_visible ? '' : 'is-hidden'">Tweet</a>
-											<a class="button is-info" :href="$store.text.email_link" :class="$store.text.email_link_visible ? '' : 'is-hidden'">Email</a>
+											<a class="button is-success" :href="$store.text.tweet_link" :class="$store.text.tweet_link_visible ? '' : 'is-hidden'">Tweet</a>
+											<a class="button is-success" :href="$store.text.email_link" :class="$store.text.email_link_visible ? '' : 'is-hidden'">Email</a>
+											<a class="button is-success" :class="$store.text.output_text.length > 0 ? '' : 'is-hidden'" @click="$store.text.copy_output()">Copy</a>
 										</div>
 									</div>
 								</div>

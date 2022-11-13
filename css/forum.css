@@ -69,3 +69,26 @@ article.post:last-child {
 .article-title:hover{
  color:#3273dc;
 }
+#news-feed, #policy-feed {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.tab-feed-container {
+  margin-bottom:0px !important;
+  background-color: #FFFFFF
+}
+.button.is-success {
+  background-color:#A7CFC1;
+  border-color:transparent;
+  color:#fff
+ }
+ .button.is-success.is-hovered,
+ .button.is-success:hover {
+  background-color:#54A3A1 ;
+  border-color:transparent;
+  color:#fff
+ }
+ .tabs.is-toggle li.is-active a {
+  background-color: #608EAF;
+  border-color: #608EAF;
+ }
