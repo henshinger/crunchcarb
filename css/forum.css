@@ -19,6 +19,7 @@ html,body {
   width:auto;
   height: auto;
 }
+
 .navbar-menu .navbar-item {
   padding: 0 2rem;
 }
@@ -61,4 +62,10 @@ article.post:last-child {
 }
 .menu-list li{
   padding: 5px;
+}
+.publication {
+  font-size: 10px !important;
+}
+.article-title:hover{
+ color:#3273dc;
 }
