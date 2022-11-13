@@ -6,6 +6,10 @@ document.addEventListener('alpine:init', () => {
         policy_feed: policy_feed,
         is_news_feed_visible: true,
         is_loading: false, 
+        email_link_visible: false,
+        tweet_link_visible: false,
+        email_link: "mailto:first.lady@whitehouse.gov?body=I%5Bm%20loving%20CruchCarb!",
+        tweet_link: "https://twitter.com/intent/tweet?text=I%5Bm%20loving%20CruchCarb!" ,
 
         set_input_text(text) {
             this.input_text = text
@@ -28,6 +32,20 @@ document.addEventListener('alpine:init', () => {
             console.log(content);
             this.output_text = content["summary"].trim();
             this.is_loading = false;
+            if ((action === "create_email") || (action === "create_petition")) {
+                this.email_link_visible = true;
+                this.email_link = `mailto:first.lady@whitehouse.gov?body=${encodeURIComponent(this.output_text)}`;   
+            } else {
+                this.email_link_visible = false;
+            }
+
+            if (action === "create_tweet") {
+                this.tweet_link_visible = true;
+                this.tweet_link = `https://twitter.com/intent/tweet?text=${encodeURIComponent(this.output_text.slice(0,280))}`;   
+            } else {
+                this.tweet_link_visible = false;
+            }
+
         }
     })
     Alpine.data('text_input', () => ({

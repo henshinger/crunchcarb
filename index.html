@@ -193,7 +193,17 @@
 								</div>
 							</div>
 							<div class="column">
-								<textarea id="output-text" class="textarea" placeholder="" rows="15" x-model="$store.text.output_text"></textarea>
+								<div class="control" :class="{'is-loading': $store.text.is_loading}">
+									<textarea id="output-text" class="textarea" placeholder="" rows="15" x-model="$store.text.output_text"></textarea>
+								</div>
+								<div class="columns">
+									<div class="column">
+										<div class="buttons is-right">
+											<a class="button is-info" :href="$store.text.tweet_link" :class="$store.text.tweet_link_visible ? '' : 'is-hidden'">Tweet</a>
+											<a class="button is-info" :href="$store.text.email_link" :class="$store.text.email_link_visible ? '' : 'is-hidden'">Email</a>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						
