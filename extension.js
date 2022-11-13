@@ -1,4 +1,4 @@
 var param = window.location.hash.substr(1);
 
 if (typeof param === 'string' && param.length !== 0) 
-    document.getElementById('textarea').innerHTML = param;
+    document.getElementById('input-text').innerHTML = param;
