@@ -60,3 +60,6 @@ article.post:last-child {
 .publication {
   font-size: 10px !important;
 }
+.article-title:hover{
+ color:#3273dc;
+}

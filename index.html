@@ -93,7 +93,7 @@
 					<div id="news-feed" class="box content" :class="$store.text.is_news_feed_visible ? '' : 'is-hidden'">
 						<template x-for="news_item in $store.text.news_feed">
 							<article class="post">
-								<a :href="news_item.url" target="_blank"><h4 x-text="news_item.title"></h4></a>
+								<a :href="news_item.url" target="_blank"><h4 x-text="news_item.title" class="article-title"></h4></a>
 								<div class="media">
 									<div class="media-content">
 										<div class="content">
@@ -115,7 +115,7 @@
 					<div id="policy-feed" class="box content" :class="$store.text.is_news_feed_visible ? 'is-hidden' : ''">
 						<template x-for="policy_item in $store.text.policy_feed">
 							<article class="post">
-								<a :href="policy_item.url" target="_blank"><h4 x-text="policy_item.title"></h4></a>
+								<a :href="policy_item.url" target="_blank"><h4 x-text="policy_item.title" class="article-title"></h4></a>
 								<div class="media">
 									<div class="media-content">
 										<div class="content">
@@ -140,7 +140,9 @@
 					<div class="box content">
 						<div class="columns">
 							<div class="column">
-								<textarea id="input-text" class="textarea" placeholder="" rows="15" x-model="$store.text.input_text"></textarea>
+								<div class="control" :class="{'is-loading': $store.text.is_loading}">
+									<textarea id="input-text" class="textarea" placeholder="" rows="15" x-model="$store.text.input_text"></textarea>
+								</div>
 								<div class="columns">
 									<div class="column">
 										<button class="button is-success" @click="$store.text.summarize()">Summarize</button>

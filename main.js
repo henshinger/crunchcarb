@@ -5,12 +5,14 @@ document.addEventListener('alpine:init', () => {
         news_feed:  news_feed,
         policy_feed: policy_feed,
         is_news_feed_visible: true,
-        
+        is_loading: false, 
+
         set_input_text(text) {
             this.input_text = text
         },
 
         async summarize(action="summarize") {
+            this.is_loading = true;
             const rawResponse = await fetch('https://asia-southeast1-carbcrunch.cloudfunctions.net/summarize', {
                 method: 'POST',
                 headers: {
@@ -24,7 +26,8 @@ document.addEventListener('alpine:init', () => {
             });
             const content = await rawResponse.json();
             console.log(content);
-            this.output_text = content["summary"];
+            this.output_text = content["summary"].trim();
+            this.is_loading = false;
         }
     })
     Alpine.data('text_input', () => ({
