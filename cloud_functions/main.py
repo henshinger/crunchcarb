@@ -61,6 +61,23 @@ def get_prompt(action, text):
     
 @functions_framework.http
 def summarize_http(request):
+    if request.method == 'OPTIONS':
+        # Allows GET requests from any origin with the Content-Type
+        # header and caches preflight response for an 3600s
+        headers = {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Max-Age': '3600'
+        }
+
+        return ('', 204, headers)
+
+    # Set CORS headers for the main request
+    headers = {
+        'Access-Control-Allow-Origin': '*'
+    }
+
     request_json = request.get_json(silent=True)
     # request_args = request.args
     print(request_json)
@@ -70,7 +87,7 @@ def summarize_http(request):
         answer = summarize(text, action)
     else:
         return "input in incorrect format/ unrecognized", 500
-    return json.dumps({"summary": answer})
+    return json.dumps({"summary": answer}), 200, headers
 
 @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(5))
 def completion_with_backoff(**kwargs):
