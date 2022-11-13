@@ -48,14 +48,14 @@ def summarize(text, action):
 def get_prompt(action, text):
     prompts = {
         "summarize": f"Summarize the following text:\n\n{text}",
-        "rephrase_public": "Rephrase the following text to be easier to understand by the public:\n\n{text}",
-        "rephrase_business": "Rephrase the following text for business leaders:\n\n{text}",
-        "rephrase_policymakers": "Rephrase the following text for policymakers:\n\n{text}",
-        "create_email": "Create an email based on the following text:\n\n{text}",
-        "create_policy": "Create a policy based on the following text:\n\n{text}",
-        "create_press_release": "Create a press release based on the following text:\n\n{text}",
-        "create_petition": "Create a petition letter based on the following text:\n\n{text}",
-        "create_tweet": "Create a tweet based on the following text:\n\n{text}" 
+        "rephrase_public": f"Rephrase the following text to be easier to understand by the public:\n\n{text}",
+        "rephrase_business": f"Rephrase the following text for business leaders:\n\n{text}",
+        "rephrase_policymakers": f"Rephrase the following text for policymakers:\n\n{text}",
+        "create_email": f"Create an email based on the following text:\n\n{text}",
+        "create_policy": f"Create a policy based on the following text:\n\n{text}",
+        "create_press_release": f"Create a press release based on the following text:\n\n{text}",
+        "create_petition": f"Create a petition letter based on the following text:\n\n{text}",
+        "create_tweet": f"Create a tweet based on the following text:\n\n{text}" 
     }
     return prompts.get(action, prompts.get("summarize"))
     
