@@ -15,7 +15,7 @@ openai.api_key = os.environ.get('OPENAI_API_KEY')
 def summarize(text, action):
     text_arr = text.split(" ")
     print(len(text_arr))
-    if len(text_arr) <= 500:        
+    if len(text_arr) <= 1500:        
         response = completion_with_backoff(
             model="text-davinci-002",
             prompt=get_prompt(action, text),
@@ -30,8 +30,8 @@ def summarize(text, action):
         print("chunking will happen")
         res = []
         chunks = [
-            text_arr[i : i + 500]
-            for i in range(0, len(text_arr), 450)
+            text_arr[i : i + 1500]
+            for i in range(0, len(text_arr), 1450)
         ]
         chunks = [" ".join(chunk) for chunk in chunks]
         for chunk in chunks:
@@ -53,7 +53,7 @@ def get_prompt(action, text):
         "rephrase_public": f"Rephrase the following text to be relevant for the public:\n\n{text}",
         "rephrase_business": f"Rephrase the following text to be relevant for business leaders:\n\n{text}",
         "rephrase_policymakers": f"Rephrase the following text to be relevant for policy makers:\n\n{text}",
-        "create_email": f"Create an email based on the following text:\n\n{text}",
+        "create_email": f"Create an email within 500 words or less based on the following text:\n\n{text}",
         "create_policy": f"Create a policy based on the following text:\n\n{text}",
         "create_press_release": f"Create a press release based on the following text:\n\n{text}",
         "create_petition": f"Create a petition letter based on the following text:\n\n{text}",
