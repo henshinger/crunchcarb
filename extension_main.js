@@ -1,6 +1,10 @@
 document.addEventListener('alpine:init', () => {
+    
+    var param = window.location.hash.substr(1);
+    if (param.length == 0)
+        param = ''
     Alpine.store('text', {
-        input_text: 'blabla',
+        input_text: param,
         output_text: '',
         news_feed:  news_feed,
         policy_feed: policy_feed,
