@@ -4,6 +4,7 @@ document.addEventListener('alpine:init', () => {
         output_text: '',
         news_feed:  news_feed,
         policy_feed: policy_feed,
+        is_news_feed_visible: true,
         
         set_input_text(text) {
             this.input_text = text

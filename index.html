@@ -86,13 +86,11 @@
 					<!-- <a class="button is-primary is-block is-alt is-large" href="#">New Post</a> -->
 					<div class="tabs is-boxed">
 						<ul>
-						  <li class="is-active"><a>Recommended</a></li>
-						  <li><a>Popular</a></li>
-						  <li><a>Recent</a></li>
-						  <li><a>Rising</a></li>
+						  <li :class="$store.text.is_news_feed_visible ? 'is-active' : ''" @click="$store.text.is_news_feed_visible = true"><a>News</a></li>
+						  <li :class="$store.text.is_news_feed_visible ? '' : 'is-active'" @click="$store.text.is_news_feed_visible = false"><a>Policy</a></li>
 						</ul>
 					  </div>
-					<div class="box content">
+					<div id="news-feed" class="box content" :class="$store.text.is_news_feed_visible ? '' : 'is-hidden'">
 						<template x-for="news_item in $store.text.news_feed">
 							<article class="post">
 								<a :href="news_item.url" target="_blank"><h4 x-text="news_item.title"></h4></a>
@@ -101,7 +99,7 @@
 										<div class="content">
 											<p>
 												<span x-text="news_item.date"></span> &nbsp;
-												<span class="tag" x-text="news_item.publication"></span>
+												<span class="tag publication" x-text="news_item.publication"></span>
 											</p>
 										</div>
 									</div>
@@ -113,8 +111,30 @@
 								</div>
 							</article>
 						</template>
-						
 					</div>
+					<div id="policy-feed" class="box content" :class="$store.text.is_news_feed_visible ? 'is-hidden' : ''">
+						<template x-for="policy_item in $store.text.policy_feed">
+							<article class="post">
+								<a :href="policy_item.url" target="_blank"><h4 x-text="policy_item.title"></h4></a>
+								<div class="media">
+									<div class="media-content">
+										<div class="content">
+											<p>
+												<span x-text="policy_item.date"></span> &nbsp;
+												<span class="tag publication" x-text="policy_item.publication"></span>
+											</p>
+										</div>
+									</div>
+									<div class="media-right">
+										<button class="button is-small" @click="$store.text.set_input_text(policy_item.body)">
+											<span class="has-text-grey-light"><i class="fa fa-pen"></i></span>
+										</button>
+									</div>
+								</div>
+							</article>
+						</template>
+					</div>
+					
 				</div>
 				<div class="column is-8">
 					<div class="box content">
