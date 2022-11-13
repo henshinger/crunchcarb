@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>CrunchCarb - Bite-Sized Insights. Loaded with Actions.</title>
+		<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+		<!-- Bulma Version 0.9.0-->
+		<link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/forum.css">
+		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		<script src="data.js"></script>
+		<script src="main.js"></script>
+		<script src="extension.js"></script>
+	</head>
+	<body>
+		<nav class="navbar is-white topNav">
+			<div class="container">
+				<a class="navbar-item" href="../">
+					<img src="css/logo.png">
+				</a>
+				<div class="navbar-brand">
+
+					<div class="navbar-burger burger" data-target="topNav">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+				<!-- <div id="topNav" class="navbar-menu">
+
+					<div class="navbar-start">
+						<a class="navbar-item" href="cover.html">Home</a>
+						<a class="navbar-item" href="landing.html">Landing</a>
+						<a class="navbar-item" href="blog.html">Blog</a>
+						<a class="navbar-item" href="instaAlbum.html">Album</a>
+						<a class="navbar-item" href="kanban[search].html">Kanban</a>
+						<a class="navbar-item" href="search.html">Search</a>
+						<a class="navbar-item" href="tabs.html">Tabs</a>
+					</div> -->
+					<div class="navbar-end">
+						<div class="navbar-item">
+							<div class="field is-grouped">
+								<p class="control">
+									<a class="button is-small">
+										<span class="icon">
+											<i class="fa fa-user-plus"></i>
+										</span>
+										<span>
+											Register
+										</span>
+									</a>
+								</p>
+								<p class="control">
+									<a class="button is-small is-info is-outlined">
+										<span class="icon">
+											<i class="fa fa-user"></i>
+										</span>
+										<span>Login</span>
+									</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<nav class="navbar is-white">
+			<div class="container">
+				<div class="navbar-menu">
+					<div class="navbar-start">
+						<!-- <a class="navbar-item is-active" href="#">Popular</a>
+						<a class="navbar-item" href="#">Recent</a>
+						<a class="navbar-item" href="#">Rising</a> -->
+
+					</div>
+					<div class="navbar-end">
+						<div class="navbar-item">
+							<input class="input" type="search" placeholder="Search forum...">
+						</div>
+						<div class="buttons">
+							<button class="button is-primary"> + New </button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<section class="container" x-data="text_input">
+			<div class="columns">
+				<div class="column is-4">
+					<!-- <a class="button is-primary is-block is-alt is-large" href="#">New Post</a> -->
+					<div class="tabs is-boxed">
+						<ul>
+						  <li :class="$store.text.is_news_feed_visible ? 'is-active' : ''" @click="$store.text.is_news_feed_visible = true"><a>News</a></li>
+						  <li :class="$store.text.is_news_feed_visible ? '' : 'is-active'" @click="$store.text.is_news_feed_visible = false"><a>Policy</a></li>
+						</ul>
+					  </div>
+					<div id="news-feed" class="box content" :class="$store.text.is_news_feed_visible ? '' : 'is-hidden'">
+						<template x-for="news_item in $store.text.news_feed">
+							<article class="post">
+								<a :href="news_item.url" target="_blank"><h4 x-text="news_item.title" class="article-title"></h4></a>
+								<div class="media">
+									<div class="media-content">
+										<div class="content">
+											<p>
+												<span x-text="news_item.date"></span> &nbsp;
+												<span class="tag publication" x-text="news_item.publication"></span>
+											</p>
+										</div>
+									</div>
+									<div class="media-right">
+										<button class="button is-small" @click="$store.text.set_input_text(news_item.body)">
+											<span class="has-text-grey-light"><i class="fa fa-pen"></i></span>
+										</button>
+									</div>
+								</div>
+							</article>
+						</template>
+					</div>
+					<div id="policy-feed" class="box content" :class="$store.text.is_news_feed_visible ? 'is-hidden' : ''">
+						<template x-for="policy_item in $store.text.policy_feed">
+							<article class="post">
+								<a :href="policy_item.url" target="_blank"><h4 x-text="policy_item.title" class="article-title"></h4></a>
+								<div class="media">
+									<div class="media-content">
+										<div class="content">
+											<p>
+												<span x-text="policy_item.date"></span> &nbsp;
+												<span class="tag publication" x-text="policy_item.publication"></span>
+											</p>
+										</div>
+									</div>
+									<div class="media-right">
+										<button class="button is-small" @click="$store.text.set_input_text(policy_item.body)">
+											<span class="has-text-grey-light"><i class="fa fa-pen"></i></span>
+										</button>
+									</div>
+								</div>
+							</article>
+						</template>
+					</div>					
+				</div>
+				<div class="column is-8">
+					<div class="box content">
+						<div class="columns">
+							<div class="column">
+								<div class="control" :class="{'is-loading': $store.text.is_loading}">
+									<textarea id="input-text" class="textarea" placeholder="" rows="15" x-model="$store.text.input_text"></textarea>
+								</div>
+								<div class="columns">
+									<div class="column">
+										<button class="button is-success" @click="$store.text.summarize()">Summarize</button>
+									</div>
+									<div class="column">
+										<div class="dropdown is-up" :class="{ 'is-active': rephrase_open }" >
+											<div class="dropdown-trigger">
+											  <button class="button is-info" aria-haspopup="true" aria-controls="dropdown-menu" x-bind="rephrase_dropdown">
+												<span>Rephrase</span>
+												<span class="icon is-small">
+												  <i class="fas fa-angle-up" aria-hidden="true"></i>
+												</span>
+											  </button>
+											</div>
+											<div class="dropdown-menu" id="dropdown-menu" role="menu">
+											  <div class="dropdown-content">
+												<template x-for="rephrase_option in rephrase_options" :key="rephrase_option.id">
+													<a class="dropdown-item" x-text="rephrase_option.text" @click="$store.text.summarize(rephrase_option.id)"></a>
+												</template>
+											  </div>
+											</div>
+										</div>
+									</div>
+									<div class="column">
+										<div class="dropdown is-up" :class="{ 'is-active': create_open }" >
+											<div class="dropdown-trigger">
+											  <button class="button is-info" aria-haspopup="true" aria-controls="dropdown-menu" x-bind="create_dropdown">
+												<span>Create</span>
+												<span class="icon is-small">
+												  <i class="fas fa-angle-up" aria-hidden="true"></i>
+												</span>
+											  </button>
+											</div>
+											<div class="dropdown-menu" id="dropdown-menu" role="menu">
+											  <div class="dropdown-content">
+												<template x-for="create_option in create_options" :key="create_option.id">
+													<a class="dropdown-item" x-text="create_option.text" @click="$store.text.summarize(create_option.id)"></a>
+												</template>
+											  </div>
+											</div>
+										</div>
+									</div>		
+								</div>
+							</div>
+							<div class="column">
+								<div class="control" :class="{'is-loading': $store.text.is_loading}">
+									<textarea id="output-text" class="textarea" placeholder="" rows="15" x-model="$store.text.output_text"></textarea>
+								</div>
+								<div class="columns">
+									<div class="column">
+										<div class="buttons is-right">
+											<a class="button is-info" :href="$store.text.tweet_link" :class="$store.text.tweet_link_visible ? '' : 'is-hidden'">Tweet</a>
+											<a class="button is-info" :href="$store.text.email_link" :class="$store.text.email_link_visible ? '' : 'is-hidden'">Email</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					
+					<!-- <div class="box content">
+						<article class="post">
+							<h4>Bulma: How do you center a button in a box?</h4>
+							<div class="media">
+								<div class="media-left">
+									<p class="image is-32x32">
+										<img src="http://bulma.io/images/placeholders/128x128.png">
+									</p>
+								</div>
+								<div class="media-content">
+									<div class="content">
+										<p>
+											<a href="#">@jsmith</a> replied 34 minutes ago &nbsp;
+											<span class="tag">Question</span>
+										</p>
+									</div>
+								</div>
+								<div class="media-right">
+									<span class="has-text-grey-light"><i class="fa fa-comments"></i> 1</span>
+								</div>
+							</div>
+						</article>
+						<article class="post">
+							<h4>How can I make a bulma button go full width?</h4>
+							<div class="media">
+								<div class="media-left">
+									<p class="image is-32x32">
+										<img src="http://bulma.io/images/placeholders/128x128.png">
+									</p>
+								</div>
+								<div class="media-content">
+									<div class="content">
+										<p>
+											<a href="#">@red</a> replied 40 minutes ago &nbsp;
+											<span class="tag">Question</span>
+										</p>
+									</div>
+								</div>
+								<div class="media-right">
+									<span class="has-text-grey-light"><i class="fa fa-comments"></i> 0</span>
+								</div>
+							</div>
+						</article>
+						<article class="post">
+							<h4>TypeError: Data must be a string or a buffer when trying touse vue-bulma-tabs</h4>
+							<div class="media">
+								<div class="media-left">
+									<p class="image is-32x32">
+										<img src="http://bulma.io/images/placeholders/128x128.png">
+									</p>
+								</div>
+								<div class="media-content">
+									<div class="content">
+										<p>
+											<a href="#">@jsmith</a> replied 53 minutes ago &nbsp;
+											<span class="tag">Question</span>
+										</p>
+									</div>
+								</div>
+								<div class="media-right">
+									<span class="has-text-grey-light"><i class="fa fa-comments"></i> 13</span>
+								</div>
+							</div>
+						</article>
+						<article class="post">
+							<h4>How to vertically center elements in Bulma?</h4>
+							<div class="media">
+								<div class="media-left">
+									<p class="image is-32x32">
+										<img src="http://bulma.io/images/placeholders/128x128.png">
+									</p>
+								</div>
+								<div class="media-content">
+									<div class="content">
+										<p>
+											<a href="#">@brown</a> replied 3 hours ago &nbsp;
+											<span class="tag">Question</span>
+										</p>
+									</div>
+								</div>
+								<div class="media-right">
+									<span class="has-text-grey-light"><i class="fa fa-comments"></i> 2</span>
+								</div>
+							</div>
+						</article>
+						<article class="post">
+							<h4>I'm trying to use hamburger menu on bulma css, but it doesn't work. What is wrong?</h4>
+							<div class="media">
+								<div class="media-left">
+									<p class="image is-32x32">
+										<img src="http://bulma.io/images/placeholders/128x128.png">
+									</p>
+								</div>
+								<div class="media-content">
+									<div class="content">
+										<p>
+											<a href="#">@hamburgler</a> replied 5 hours ago &nbsp;
+											<span class="tag">Question</span>
+										</p>
+									</div>
+								</div>
+								<div class="media-right">
+									<span class="has-text-grey-light"><i class="fa fa-comments"></i> 2</span>
+								</div>
+							</div>
+						</article>
+						<article class="post">
+							<h4>How to make tiles wrap with Bulma CSS?</h4>
+							<div class="media">
+								<div class="media-left">
+									<p class="image is-32x32">
+										<img src="http://bulma.io/images/placeholders/128x128.png">
+									</p>
+								</div>
+								<div class="media-content">
+									<div class="content">
+										<p>
+											<a href="#">@rapper</a> replied 3 hours ago &nbsp;
+											<span class="tag">Question</span>
+										</p>
+									</div>
+								</div>
+								<div class="media-right">
+									<span class="has-text-grey-light"><i class="fa fa-comments"></i> 2</span>
+								</div>
+							</div>
+						</article>
+					</div> -->
+				</div>
+			</div>
+		</section>
+		<!-- <footer class="footer">
+
+			<div class="container">
+				<div class="content has-text-centered">
+					<div class="columns is-mobile is-centered">
+						<div class="field is-grouped is-grouped-multiline">
+							<div class="control">
+								<div class="tags has-addons">
+									<a class="tag is-link" href="https://github.com/BulmaTemplates/bulma-templates">Bulma Templates</a>
+									<span class="tag is-light">Daniel Supernault</span>
+								</div>
+							</div>
+							<div class="control">
+								<div class="tags has-addons">
+									<a class="tag is-link">The source code is licensed</a>
+									<span class="tag is-light">MIT &nbsp;<i class="fa fa-github"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer> -->
+	</body>
+</html>
