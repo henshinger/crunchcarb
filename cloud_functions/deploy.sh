@@ -1,0 +1,1 @@
+gcloud functions deploy summarize --runtime=python310 --region=asia-southeast1 --entry-point=summarize_http --trigger-http --project=carbcrunch --allow-unauthenticated
