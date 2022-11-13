@@ -4,7 +4,7 @@ document.addEventListener('alpine:init', () => {
     if (param.length == 0)
         param = ''
     Alpine.store('text', {
-        input_text: param,
+        input_text: decodeURI(param),
         output_text: '',
         news_feed:  news_feed,
         policy_feed: policy_feed,
