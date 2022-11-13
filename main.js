@@ -1,3 +1,8 @@
+async function printJSON() {
+    const response = await fetch("./data.json");
+    const json = await response.json();
+    console.log(json);
+};
 document.addEventListener('alpine:init', () => {
     Alpine.store('text', {
         input_text: '',
@@ -54,6 +59,7 @@ document.addEventListener('alpine:init', () => {
         },
     }));
     console.log("main.js loaded")
+    printJSON()
 })
 
 // const summarize = async (text) => {
