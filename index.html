@@ -4,20 +4,20 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Forum - Free Bulma template</title>
-		<link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+		<title>CrunchCarb - Bite-Sized Insights. Loaded with Actions.</title>
+		<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 		<!-- Bulma Version 0.9.0-->
 		<link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-		<link rel="stylesheet" type="text/css" href="../css/forum.css">
+		<link rel="stylesheet" type="text/css" href="css/forum.css">
+		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 	</head>
 	<body>
 		<nav class="navbar is-white topNav">
 			<div class="container">
 				<div class="navbar-brand">
 					<a class="navbar-item" href="../">
-						<img src="../images/bulma.png" width="112" height="28">
+						<img src="images/bulma.png" width="112" height="28">
 					</a>
 					<div class="navbar-burger burger" data-target="topNav">
 						<span></span>
@@ -98,6 +98,43 @@
 					</aside>
 				</div>
 				<div class="column is-9">
+					<div class="box content">
+						<textarea class="textarea" placeholder="10 lines of textarea" rows="10"></textarea>
+					</div>
+					<div class="buttons">
+						<button class="button is-success">Summarize</button>
+						<button class="button is-info">Rephrase</button>
+						<div class="dropdown is-up" :class="{ 'is-active': open }" x-data="{ open: false }" >
+							<div class="dropdown-trigger">
+							  <button class="button" aria-haspopup="true" aria-controls="dropdown-menu" @click="open = ! open">
+								<span>Dropdown button</span>
+								<span class="icon is-small">
+								  <i class="fas fa-angle-up" aria-hidden="true"></i>
+								</span>
+							  </button>
+							</div>
+							<div class="dropdown-menu" id="dropdown-menu" role="menu">
+							  <div class="dropdown-content">
+								<a href="#" class="dropdown-item">
+								  Dropdown item
+								</a>
+								<a class="dropdown-item">
+								  Other dropdown item
+								</a>
+								<a href="#" class="dropdown-item is-active">
+								  Active dropdown item
+								</a>
+								<a href="#" class="dropdown-item">
+								  Other dropdown item
+								</a>
+								<hr class="dropdown-divider">
+								<a href="#" class="dropdown-item">
+								  With a divider
+								</a>
+							  </div>
+							</div>
+						  </div>	
+					</div>
 					<div class="box content">
 						<article class="post">
 							<h4>Bulma: How do you center a button in a box?</h4>
@@ -251,6 +288,5 @@
 				</div>
 			</div>
 		</footer>
-		<script async type="text/javascript" src="../js/bulma.js"></script>
 	</body>
 </html>
