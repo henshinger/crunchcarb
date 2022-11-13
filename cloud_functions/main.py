@@ -13,7 +13,8 @@ from tenacity import (
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 def summarize(text, action):
-    text_arr = text.split("\s")
+    text_arr = text.split(" ")
+    print(len(text_arr))
     if len(text_arr) <= 500:        
         response = completion_with_backoff(
             model="text-davinci-002",
@@ -26,6 +27,7 @@ def summarize(text, action):
         )
         return response.choices[0].text
     else:
+        print("chunking will happen")
         res = []
         chunks = [
             text_arr[i : i + 500]
@@ -48,9 +50,9 @@ def summarize(text, action):
 def get_prompt(action, text):
     prompts = {
         "summarize": f"Summarize the following text:\n\n{text}",
-        "rephrase_public": f"Rephrase the following text to be easier to understand by the public:\n\n{text}",
-        "rephrase_business": f"Rephrase the following text for business leaders:\n\n{text}",
-        "rephrase_policymakers": f"Rephrase the following text for policymakers:\n\n{text}",
+        "rephrase_public": f"Rephrase the following text to be relevant for the public:\n\n{text}",
+        "rephrase_business": f"Rephrase the following text to be relevant for business leaders:\n\n{text}",
+        "rephrase_policymakers": f"Rephrase the following text to be relevant for policy makers:\n\n{text}",
         "create_email": f"Create an email based on the following text:\n\n{text}",
         "create_policy": f"Create a policy based on the following text:\n\n{text}",
         "create_press_release": f"Create a press release based on the following text:\n\n{text}",
