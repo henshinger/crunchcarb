@@ -1,0 +1,23 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+	"name": "__MSG_manifest_name__",
+	"short_name": "__MSG_manifest_shortname__",
+	"author": "__MSG_manifest_author__",
+	"description": "__MSG_manifest_description__",
+	"version": "1.0.0",
+	"permissions": ["contextMenus","activeTab"],
+	"background": {
+		"scripts": ["script.js"]
+	},
+	"icons": {
+		"16": "icons/icon16.png",
+		"48": "icons/icon48.png",
+		"128": "icons/icon128.png"
+	},
+	"browser_action": {},
+	"default_locale": "en",
+	"minimum_chrome_version": "40",
+	"offline_enabled": false,
+	"manifest_version": 2
+}
