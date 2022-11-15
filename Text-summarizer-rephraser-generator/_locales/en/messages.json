@@ -1,0 +1,26 @@
+{
+	"manifest_name":
+	{
+		"message": "Text summarizer - rephraser - generator"
+	}
+	,
+	"manifest_shortname":
+	{
+		"message": "Text summarizer"
+	}
+	,
+	"manifest_description":
+	{
+		"message": "Select the text you want to summarize, rephrase or generate from."
+	}
+	,
+	"manifest_author":
+	{
+		"message": "Crunchcarbs"
+	}
+	,
+	"app_rightclicktext":
+	{
+		"message": "Summarize / Rephrase / Generate from this selection"
+	}
+}
